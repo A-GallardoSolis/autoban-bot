@@ -30,14 +30,19 @@ client.on("messageCreate", async message => {
 
     try {
 
+      // Borra el mensaje
+        await message.delete().catch(() => {});
+
     const logChannel = message.guild.channels.cache.get(LOG_CHANNEL);
 
       if (logChannel) {
 
         await logChannel.send(
-         `🚫 ${message.author.tag} fue baneado automáticamente por escribir en <#${CHANNEL_ID}>`
-        );
+        `🚫 ${message.author.tag} fue baneado automáticamente
 
+        📝 Mensaje: ${message.content}
+
+        📍 Canal: <#${CHANNEL_ID}>`
       }  
 
       await message.member.ban({
