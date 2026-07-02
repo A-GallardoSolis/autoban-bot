@@ -21,6 +21,10 @@ client.on("messageCreate", async message => {
 
   if (message.author.bot) return;
 
+  // No banear administradores
+  if (message.member.permissions.has("Administrator"))
+      return;
+
   if (message.channel.id === CHANNEL_ID) {
 
     try {
