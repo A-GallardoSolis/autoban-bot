@@ -35,15 +35,14 @@ client.on("messageCreate", async message => {
 
     const logChannel = message.guild.channels.cache.get(LOG_CHANNEL);
 
-      if (logChannel) {
+    if (logChannel) {
+      await logChannel.send(
+        `🚫 ${message.author.tag} fue baneado automáticamente.
 
-        await logChannel.send(
-        `🚫 ${message.author.tag} fue baneado automáticamente
-
-        📝 Mensaje: ${message.content}
-
+        📝 Mensaje: ${message.content || "(sin texto)"}
         📍 Canal: <#${CHANNEL_ID}>`
-      }  
+      );
+    }
 
       await message.member.ban({
         reason: "Autoban channel"
