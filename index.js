@@ -12,6 +12,7 @@ const client = new Client({
 });
 
 const CHANNEL_ID = process.env.CHANNEL_ID;
+const LOG_CHANNEL = "1522188735486365777";
 
 client.on("ready", () => {
   console.log(`Conectado como ${client.user.tag}`);
@@ -28,6 +29,16 @@ client.on("messageCreate", async message => {
   if (message.channel.id === CHANNEL_ID) {
 
     try {
+
+    const logChannel = message.guild.channels.cache.get(LOG_CHANNEL);
+
+      if (logChannel) {
+
+        await logChannel.send(
+         `🚫 ${message.author.tag} fue baneado automáticamente por escribir en <#${CHANNEL_ID}>`
+        );
+
+      }  
 
       await message.member.ban({
         reason: "Autoban channel"
